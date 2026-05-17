@@ -1,0 +1,13 @@
+{
+  "buildCommand": "npm install --prefix frontend && npm run build --prefix frontend",
+  "outputDirectory": "frontend/build",
+  "env": {
+    "REACT_APP_BACKEND_URL": "@backend_url"
+  },
+  "redirects": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
+    }
+  ]
+}
