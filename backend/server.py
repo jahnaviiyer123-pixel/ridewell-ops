@@ -873,3 +873,29 @@ app.add_middleware(
     expose_headers=["*"],
     max_age=3600,
 )
+
+
+# ---------- Serve React Frontend ----------
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+FRONTEND_BUILD_DIR = Path(__file__).parent.parent / "frontend" / "build"
+
+if FRONTEND_BUILD_DIR.exists():
+    # Mount the /static folder containing bundle assets
+    app.mount("/static", StaticFiles(directory=str(FRONTEND_BUILD_DIR / "static")), name="static")
+
+    @app.get("/{catchall:path}")
+    async def serve_frontend(request: Request, catchall: str):
+        # Do not catch requests starting with api/
+        if catchall.startswith("api"):
+            raise HTTPException(status_code=404, detail="Not Found")
+        
+        # Check if the requested file actually exists in the build root (like favicon.ico, logo192.png)
+        file_path = FRONTEND_BUILD_DIR / catchall
+        if file_path.exists() and file_path.is_file():
+            return FileResponse(file_path)
+            
+        # Default to the SPA index.html for page routing
+        return FileResponse(str(FRONTEND_BUILD_DIR / "index.html"))
+
