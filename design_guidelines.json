@@ -1,0 +1,157 @@
+{
+  "theme": "light",
+  "archetype": "Archetype 4: Swiss & High-Contrast",
+  "typography": {
+    "fonts": {
+      "heading": "Chivo, sans-serif",
+      "body": "IBM Plex Sans, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "hierarchy": {
+      "h1": "text-4xl font-black tracking-tighter leading-none text-zinc-900",
+      "h2": "text-2xl font-bold tracking-tight leading-tight text-zinc-900",
+      "h3": "text-xl font-bold tracking-tight text-zinc-900",
+      "h4": "text-lg font-semibold tracking-tight text-zinc-800",
+      "body": "text-sm text-zinc-700 leading-relaxed",
+      "label": "text-xs font-bold uppercase tracking-[0.2em] text-zinc-500",
+      "data": "text-base font-medium text-zinc-900 font-mono"
+    },
+    "guidelines": [
+      "Use Chivo for all headings to provide an industrial, solid, reliable look suitable for an operations dashboard.",
+      "Use IBM Plex Sans for tables, inputs, and dense body content.",
+      "Labels and overlines must be heavily tracked uppercase for clear scanning.",
+      "Do not use generic fonts like Inter, Roboto, or Open Sans."
+    ]
+  },
+  "colors": {
+    "background": {
+      "app": "bg-zinc-50",
+      "surface": "bg-white",
+      "surface_alt": "bg-zinc-100",
+      "surface_glass": "bg-white/80 backdrop-blur-xl backdrop-saturate-150"
+    },
+    "text": {
+      "primary": "text-zinc-950",
+      "secondary": "text-zinc-600",
+      "tertiary": "text-zinc-400",
+      "inverse": "text-white"
+    },
+    "border": {
+      "default": "border-zinc-200",
+      "hover": "border-zinc-400",
+      "focus": "border-blue-600"
+    },
+    "brand": {
+      "primary": "bg-blue-700 hover:bg-blue-800 text-white",
+      "secondary": "bg-zinc-900 hover:bg-zinc-800 text-white",
+      "accent": "bg-yellow-400 hover:bg-yellow-500 text-zinc-900"
+    },
+    "status": {
+      "success": "bg-emerald-100 text-emerald-800 border-emerald-200",
+      "warning": "bg-yellow-100 text-yellow-800 border-yellow-200",
+      "error": "bg-red-100 text-red-800 border-red-200",
+      "info": "bg-blue-100 text-blue-800 border-blue-200"
+    },
+    "guidelines": [
+      "Follow 'The Tinted Grey' rule: use Zinc (slightly cool/industrial) instead of pure gray.",
+      "Primary CTA uses Deep Blue (Trust/Efficiency), but visual accents and alerts should use Safety Yellow (Road/Driving theme).",
+      "Data density requires extreme contrast: Ensure tables use alternating zinc-50/white stripes."
+    ]
+  },
+  "layout": {
+    "spacing": {
+      "container": "p-6 md:p-8 lg:p-12",
+      "widget_gap": "gap-4 md:gap-6",
+      "section_gap": "gap-12"
+    },
+    "grid": {
+      "dashboard_bento": "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4",
+      "dashboard_summary": "col-span-1",
+      "dashboard_main_table": "col-span-1 md:col-span-2 lg:col-span-3",
+      "dashboard_side_feed": "col-span-1 row-span-2"
+    },
+    "surface_strategy": {
+      "cards": "bg-white border border-zinc-200 rounded-none shadow-sm",
+      "headers": "sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-zinc-200",
+      "sidebar": "border-r border-zinc-200 bg-zinc-50"
+    },
+    "guidelines": [
+      "Adopt 'The Control Room' Grid: Density, Data Correlation, Scanability.",
+      "Use sharp edges or max 4px radius (rounded-sm) to maintain the functional, technical aesthetic.",
+      "Avoid floating 'soft' cards. Use sharp, bordered bento boxes that snap tightly together.",
+      "Never center-align dense data. Left-align for fast scanning, right-align numbers/prices."
+    ]
+  },
+  "components": {
+    "buttons": "rounded-none font-bold uppercase tracking-wide text-xs px-6 py-3 transition-colors",
+    "inputs": "rounded-none border-zinc-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 bg-white",
+    "tables": "w-full text-sm text-left border-collapse",
+    "table_headers": "bg-zinc-100 text-zinc-500 font-bold uppercase tracking-wider text-xs p-3 border-y border-zinc-200",
+    "table_cells": "p-3 border-b border-zinc-100 text-zinc-900",
+    "badges": "rounded-full px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider border",
+    "shadcn_overrides": [
+      "Override default Shadcn rounded corners to `rounded-none` or `rounded-sm`.",
+      "Remove heavy drop shadows from dialogs, replace with solid borders (e.g., `border-2 border-zinc-900 shadow-[8px_8px_0_0_rgba(24,24,27,1)]` for a slight brutalist punch, or keep it strictly flat).",
+      "Use Shadcn tables but increase data density (tighter padding for cells `p-2` instead of `p-4`)."
+    ]
+  },
+  "interactions": {
+    "hover": "hover:bg-zinc-100 transition-colors duration-150 ease-in-out",
+    "focus": "focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2",
+    "active": "active:scale-[0.98] transition-transform",
+    "guidelines": [
+      "Micro-interactions only. No bouncy animations.",
+      "Always explicitly set hover states (e.g., `hover:bg-blue-800 hover:text-white`).",
+      "Progressive disclosure: show summary first, reveal 10-class history on click."
+    ]
+  },
+  "media": {
+    "image_urls": [
+      {
+        "category": "login_background",
+        "url": "https://static.prod-images.emergentagent.com/jobs/4c1dca04-8039-4071-823b-fcb736b5e79c/images/783521f8f52360b1d95831b3d4c8135d4818308909f8ac85702a73cdf81e568e.png",
+        "description": "Minimalist Swiss-style poster illustration of a modern motorcycle and scooter. Use as the hero image/background for the admin/trainer login screen."
+      },
+      {
+        "category": "empty_state_illustration",
+        "url": "https://static.prod-images.emergentagent.com/jobs/4c1dca04-8039-4071-823b-fcb736b5e79c/images/d5fee6ea3a2bf6803cd4106885cf08071906d5153c2c8e7ac0ad6cf3bba37348.png",
+        "description": "Abstract top-down view of winding asphalt roads with yellow lines. Use for empty dashboard states or zero-data screens."
+      },
+      {
+        "category": "trainer_avatar_1",
+        "url": "https://images.unsplash.com/photo-1760171447686-066462004862?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzV8MHwxfHNlYXJjaHwyfHxtb3RvcmN5Y2xlJTIwZHJpdmluZyUyMHNjaG9vbHxlbnwwfHx8fDE3NzY4NzYwNzR8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Two motorcyclists on a sunny day. Use for trainer profiles or student records."
+      },
+      {
+        "category": "trainer_avatar_2",
+        "url": "https://images.unsplash.com/photo-1644786958196-6db46c72c630?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzV8MHwxfHNlYXJjaHwzfHxtb3RvcmN5Y2xlJTIwZHJpdmluZyUyMHNjaG9vbHxlbnwwfHx8fDE3NzY4NzYwNzR8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Man riding a motorcycle down a street next to traffic cones. Perfect for driving school context."
+      },
+      {
+        "category": "course_thumbnail",
+        "url": "https://images.unsplash.com/photo-1764605514633-eb9a675ffbb8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzV8MHwxfHNlYXJjaHwxfHxtb3RvcmN5Y2xlJTIwZHJpdmluZyUyMHNjaG9vbHxlbnwwfHx8fDE3NzY4NzYwNzR8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Motorcyclists practicing on a cone course."
+      }
+    ]
+  },
+  "icons": {
+    "library": "Phosphor Icons (@phosphor-icons/react)",
+    "style": "Regular or Bold weights to match the industrial Swiss font.",
+    "command": "yarn add @phosphor-icons/react"
+  },
+  "instructions_to_main_agent": [
+    "Install and use Chivo and IBM Plex Sans via Google Fonts.",
+    "Use Phosphor Icons for all dashboard icons.",
+    "Do NOT use 'Inter' for headings.",
+    "Implement a strict bento-box grid for the dashboard (dense data, minimal whitespace between widgets, clear borders).",
+    "Build the 10-class tracker as a visual progress bar with interactive blocks (e.g., 10 small squares, green for completed, red for missed, empty for pending).",
+    "For the login page, create a split-screen design: Left side functional login form on solid white, Right side edge-to-edge illustration using the 'login_background' media URL.",
+    "Ensure all interactive components have 'data-testid' attributes (e.g., data-testid='mark-attendance-btn').",
+    "Do NOT round cards heavily. Stick to `rounded-none` or max `rounded-sm` for an industrial operations feel.",
+    "Make the navigation a permanent left-sidebar for Desktop, collapsing to a hamburger menu on Mobile.",
+    "Use standard HTML/Tailwind for structural layout and spacing. Use customized Shadcn for complex forms, tables, and dialogs."
+  ],
+  "accessibility": {
+    "testing": "All elements must have high contrast. Use standard aria-labels for icon-only buttons. Add data-testid to all functional elements."
+  }
+}
