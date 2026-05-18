@@ -4,8 +4,8 @@ uvicorn==0.25.0
 python-multipart==0.0.24
 python-dotenv==1.2.2
 
-# Database & Async Driver
-motor==3.3.1
+motor==3.6.0
+pymongo==4.9.1
 
 # Security & Authentication
 bcrypt==4.1.3
