@@ -49,6 +49,7 @@ export default function StudentDetail() {
     (async () => {
       try { await load(); } finally { setLoading(false); }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const saveEdit = async () => {
