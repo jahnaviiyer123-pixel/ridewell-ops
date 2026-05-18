@@ -22,7 +22,11 @@ import requests as http_requests
 
 # ---------- DB ----------
 mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
+try:
+    import certifi
+    client = AsyncIOMotorClient(mongo_url, tlsCAFile=certifi.where())
+except ImportError:
+    client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
 # ---------- App ----------

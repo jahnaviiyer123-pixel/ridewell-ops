@@ -6,6 +6,7 @@ python-dotenv==1.2.2
 
 motor==3.6.0
 pymongo==4.9.1
+certifi==2024.12.14
 
 # Security & Authentication
 bcrypt==4.1.3
