@@ -859,7 +859,7 @@ origins_env = os.environ.get("CORS_ORIGINS", "")
 if origins_env.strip():
     allowed_origins = [o.strip() for o in origins_env.split(",") if o.strip()]
 else:
-    # Default: allow common local dev ports + any Vercel preview
+    # Default: allow common local dev ports + any Vercel domain
     allowed_origins = [
         "http://localhost:3000",
         "http://localhost:3001",
@@ -870,7 +870,7 @@ else:
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
-    allow_origin_regex=r"https://.*\.vercel\.app",
+    allow_origin_regex=r"https://.*\.vercel\.app$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
