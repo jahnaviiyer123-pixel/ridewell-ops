@@ -11,7 +11,7 @@ if [ -f yarn.lock ]; then
     yarn install --frozen-lockfile
     yarn build
 else
-    npm install
+    npm install --legacy-peer-deps
     npm run build
 fi
 
