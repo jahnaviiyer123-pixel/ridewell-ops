@@ -45,11 +45,11 @@ export default function StudentDetail() {
     setEditForm(s.data);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     (async () => {
       try { await load(); } finally { setLoading(false); }
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const saveEdit = async () => {
