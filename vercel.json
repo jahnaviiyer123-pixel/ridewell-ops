@@ -2,11 +2,10 @@
   "version": 2,
   "buildCommand": "npm install --prefix frontend && npm run build --prefix frontend",
   "outputDirectory": "frontend/build",
-  "routes": [
-    { "src": "/api/(.*)", "dest": "api/index.py" },
-    { "src": "/docs", "dest": "api/index.py" },
-    { "src": "/openapi.json", "dest": "api/index.py" },
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "index.html" }
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api" },
+    { "source": "/docs", "destination": "/api" },
+    { "source": "/openapi.json", "destination": "/api" },
+    { "source": "/((?!api|docs|openapi.json).*)", "destination": "/index.html" }
   ]
 }
