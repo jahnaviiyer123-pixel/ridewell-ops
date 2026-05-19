@@ -21,13 +21,31 @@ import requests as http_requests
 
 
 # ---------- DB ----------
-mongo_url = os.environ['MONGO_URL']
+mongo_url = os.environ.get("MONGO_URL")
+db_name = os.environ.get("DB_NAME")
+if not mongo_url or not db_name:
+    missing = []
+    if not mongo_url:
+        missing.append("MONGO_URL")
+    if not db_name:
+        missing.append("DB_NAME")
+    raise RuntimeError(f"Missing required environment variables: {', '.join(missing)}")
+_mongo_client_kwargs = {
+    # Fail fast (important for local dev + serverless cold starts)
+    "serverSelectionTimeoutMS": 5000,
+    "connectTimeoutMS": 5000,
+}
 try:
     import certifi
-    client = AsyncIOMotorClient(mongo_url, tlsCAFile=certifi.where())
+    is_local = "localhost" in mongo_url or "127.0.0.1" in mongo_url
+    has_tls = "tls=true" in mongo_url.lower() or "ssl=true" in mongo_url.lower() or "mongodb+srv" in mongo_url
+    if not is_local or has_tls:
+        client = AsyncIOMotorClient(mongo_url, tlsCAFile=certifi.where(), **_mongo_client_kwargs)
+    else:
+        client = AsyncIOMotorClient(mongo_url, **_mongo_client_kwargs)
 except ImportError:
-    client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+    client = AsyncIOMotorClient(mongo_url, **_mongo_client_kwargs)
+db = client[db_name]
 
 # ---------- App ----------
 app = FastAPI(title="RideWell Ops")
@@ -300,13 +318,17 @@ async def _safe_create_index(collection, keys, **kwargs):
 
 @app.on_event("startup")
 async def _startup():
-    await _safe_create_index(db.users, "email", unique=True)
-    await _safe_create_index(db.students, "id", unique=True)
-    await _safe_create_index(db.classes, [("student_id", 1), ("class_number", 1)], unique=True)
-    await _safe_create_index(db.attendance, [("trainer_id", 1), ("date", 1)], unique=True)
-    await _safe_create_index(db.slots, "label", unique=True)
-    await seed_admin()
-    await seed_default_slots()
+    try:
+        await _safe_create_index(db.users, "email", unique=True)
+        await _safe_create_index(db.students, "id", unique=True)
+        await _safe_create_index(db.classes, [("student_id", 1), ("class_number", 1)], unique=True)
+        await _safe_create_index(db.attendance, [("trainer_id", 1), ("date", 1)], unique=True)
+        await _safe_create_index(db.slots, "label", unique=True)
+        await seed_admin()
+        await seed_default_slots()
+    except Exception:
+        logger.exception("Startup failed (MongoDB connection / seeding). Check MONGO_URL, DB_NAME, and Atlas Network Access.")
+        raise
 
 
 @app.on_event("shutdown")
@@ -902,4 +924,3 @@ if FRONTEND_BUILD_DIR.exists():
             
         # Default to the SPA index.html for page routing
         return FileResponse(str(FRONTEND_BUILD_DIR / "index.html"))
-

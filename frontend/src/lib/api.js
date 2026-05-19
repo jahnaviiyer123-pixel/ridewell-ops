@@ -17,7 +17,9 @@ api.interceptors.request.use((config) => {
 });
 
 export function formatApiError(detail) {
-  if (detail == null) return "Something went wrong. Please try again.";
+  // Return null so callers can fall back to the transport error message
+  // (e.g. "Network Error", timeouts, 404, etc.).
+  if (detail == null) return null;
   if (typeof detail === "string") return detail;
   if (Array.isArray(detail))
     return detail
